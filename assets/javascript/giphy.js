@@ -1,8 +1,8 @@
 //Global Vars
 //===============
 
-var cryptos = ["bitcoin", "litecoin", "hodl", "dogecoin", "cryptokitties", "fomo", "xrp", "altseason"];
-
+var cryptos = ["bitcoin", "litecoin", "hodl", "dogecoin", "cryptokitties", "fomo", "xrp", "altseason", "decentralization", "blockchain"];
+var cryptoText;
 
 
 
@@ -32,26 +32,49 @@ function showBtn() {
                 method: "GET"
             })
                 .then(function (response) {
-                    
+
 
                     var respData = response.data;
                     console.log(respData);
-                    for (var i = 0; i < respData.length; i++) {
-                        var giphyImg = $("<img>");
-                        giphyImg.attr("src", respData[i].images.fixed_height.url);
-                        giphyImg.addClass("img-fluid");
-                        console.log(giphyImg);
-                        
-                        var giphyRating = $("<p>");
-                        giphyRating.text(respData[i].rating);
 
+                    respData.forEach(function (elem, i) {
+
+                        var giphyImg = $("<img>");
+
+                        giphyImg.attr("src", elem.images.fixed_height_still.url);
+                        giphyImg.attr("data-still", elem.images.fixed_height_still.url);
+                        giphyImg.attr("data-state", "still");
+                        giphyImg.attr("data-animate", elem.images.fixed_height.url);
+                        giphyImg.addClass("img-fluid btn-outline-success gpimg giphyBtn");
+                        giphyImg.on("click", function () {
+                            var giphyState = $(this).attr("data-state");
+                            if (giphyState === "still") {
+                                $(this).attr("src", $(this).attr("data-animate"));
+                                $(this).attr("data-state", "animate");
+                            } else {
+                                $(this).attr("src", $(this).attr("data-still"));
+                                $(this).attr("data-state", "still");
+                            }
+
+                        })
+
+                        var giphyRating = $("<p>");
+                        giphyRating.addClass("text-center rating");
+
+                        $("#giphy").prepend(" Rated:" + respData[i].rating + "<p>");
                         $("#giphy").prepend(giphyImg);
-                        $("#giphy").prepend("Rated:" + giphyRating);
-                        
-                        
-                        
-                        
-                    }
+
+
+                        $("#giphy").after(giphyRating);
+
+                    })
+
+
+
+
+
+
+                    // }
                 })
 
 
@@ -63,12 +86,25 @@ function showBtn() {
 }
 
 
+function addButton() {
 
+    var textInput;
+
+
+    $("#submit").on("click", function () {
+
+        textInput = $("#text-crypto").val().trim();
+        console.log(textInput);
+
+    })
+
+
+}
 
 
 //Main
 //============
 
 
-
+addButton();
 showBtn();
