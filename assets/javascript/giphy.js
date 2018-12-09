@@ -11,9 +11,9 @@ var cryptoText;
 //===============
 
 function showBtn() {
-
+$("#buttons").empty();
     cryptos.forEach(function (elem, i) {
-
+        
         var cryptoBtn = $("<button>");
         cryptoBtn.addClass("btn btn-success m-1");
         cryptoBtn.text(elem);
@@ -74,7 +74,7 @@ function showBtn() {
 
 
 
-                    // }
+                    
                 })
 
 
@@ -91,10 +91,13 @@ function addButton() {
     var textInput;
 
 
-    $("#submit").on("click", function () {
-
+    $("#submit").on("click", function (event) {
+        event.preventDefault();
         textInput = $("#text-crypto").val().trim();
-        console.log(textInput);
+        
+        cryptos.push(textInput);
+        console.log(cryptos);
+        showBtn();
 
     })
 
