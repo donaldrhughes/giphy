@@ -23,7 +23,7 @@ $("#buttons").empty();
 
             var query = "q=" + elem;
             var apikey = "x6t5WwzJNrOFH2o9necLTHkI7UJN1pvj"
-            var resp = "http://api.giphy.com/v1/gifs/search?" + query + "&api_key=" + apikey + "&limit=10";
+            var resp = "https://api.giphy.com/v1/gifs/search?" + query + "&api_key=" + apikey + "&limit=10";
 
 
 
@@ -70,13 +70,8 @@ $("#buttons").empty();
                     })
 
 
-
-
-
-
                     
                 })
-
 
 
         })
